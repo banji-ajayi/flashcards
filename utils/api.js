@@ -9,12 +9,12 @@ const Decks = {
 		{
 		  question: 'What is React?',
 		  answer: 'A library for managing user interfaces',
-		  Correct : true 
+		  correct : true 
 		},
 		{
 		  question: 'Regular functions take in arguments while react takes what?',
 		  answer: 'Props',
-		  Correct: true
+		  correct: true
 		}
 	  ]
 	},
@@ -24,7 +24,7 @@ const Decks = {
 		{
 		  question: 'Below equation represent Newton\'s First Law of motion',
 		  answer: 'V^2 = U^2 + 1/2at^2',
-		  Correct: false
+		  correct: false
 		}
 	  ]
 	}
@@ -41,6 +41,17 @@ const Decks = {
 			questions: []
 		}
 	}))
+}
+
+export function addNewCardToDeck(name, card) {
+	return AsyncStorage.getItem(STORAGE_KEY)
+	.then(data => JSON.parse(data))
+	.then(data => {
+		data[name].questions.push(card)
+		AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+			return data
+	})
+
 }
 
 

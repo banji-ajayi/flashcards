@@ -10,6 +10,7 @@ import IndividualDeckView  from './components/IndividualDeckView';
 import { createStore } from 'redux'
 import reducer from './reducers/index'
 import { Provider } from 'react-redux'
+import AddCard from './components/AddCard';
 
 
 function FlashCardStatusBar ({ backgroundColor, ...props}) {
@@ -79,6 +80,16 @@ const MainNavigator = StackNavigator({
 				backgroundColor: lightPurp
 			}
 		}
+	},
+	AddCard: {
+		screen: AddCard,
+		 navigationOptions: {
+			 title: 'Add Card',
+			 headerTintColor: white,
+			 headerStyle: {
+				backgroundColor: lightPurp
+			}
+		 }
 	}
 })
 

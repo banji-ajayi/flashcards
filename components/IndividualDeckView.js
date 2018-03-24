@@ -34,12 +34,13 @@ const styles = StyleSheet.create({
 	},
 	clkBtn: {	
 		padding: 10,
-		paddingLeft: 30,
-		paddingRight: 30,
+		paddingLeft: 20,
+		paddingRight: 6,
 		borderRadius: 7,
 		height: 44,
 		alignSelf: 'flex-end',
-		marginRight: 40,
+		marginRight: 60,
+		
 		color: white,
 		fontSize: 21,
 		justifyContent: 'center',
