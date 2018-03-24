@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Platform, StyleSheet } from 'react-native';
-import { getDecks } from '../utils/api';
 import TextButton from './TextButton';
 import { connect } from 'react-redux';
 import { getAllDecks } from '../utils/api'
@@ -15,12 +14,8 @@ export class Decklist extends Component {
 
 	render() {
 		const { decks } = this.props
-		console.log(this.props);
-		console.log(getAllDecks())
-		//const decks = getDecks();
-		//console.log(this.props);
 		
-
+		//console.log(this.props);
 		return (
 			<View style={styles.container} >
 			{Object.keys(decks).map( (deck) => {
@@ -62,7 +57,10 @@ function mapDispatchToProps (dispatch){
 }
 
 function mapStateToProps (decks){
-	return decks;
+	return {
+		//decks:decks
+		decks
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Decklist)

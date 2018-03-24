@@ -45,6 +45,7 @@ const Decks = {
 
 
   export function getAllDecks (){
+     
 	  return AsyncStorage.getItem(STORAGE_KEY)
 	  .then(data => {
 		  if(data === null || data === '') {

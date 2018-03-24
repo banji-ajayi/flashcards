@@ -1,5 +1,5 @@
 import  React from 'React';
-import { Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 import  { lightPurp }  from '../utils/color';
 
 
@@ -13,7 +13,7 @@ export default function TextButton ({children, onPress, style={}}) {
 
 const styles = StyleSheet.create({
 	reset: {
-		textAlign: 'center',
+		//textAlign: 'center',
 		color: lightPurp
 	}
 })

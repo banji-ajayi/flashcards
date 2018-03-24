@@ -72,10 +72,9 @@ const MainNavigator = StackNavigator({
 	},
 	IndividualDeckView: {
 		screen: IndividualDeckView,
-		navigatorOptions: {
-			// title: 'Deck Detail',
-			tabBarlabel: 'Deck Detail',
-			headerTintColor: lightPurp,
+		navigationOptions: {
+			title: 'Deck Detail',
+			headerTintColor: white,
 			headerStyle: {
 				backgroundColor: lightPurp
 			}

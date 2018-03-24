@@ -1,16 +1,26 @@
 import  React, { Component } from 'React';
 import { getDecks } from '../utils/api';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import ClickButton from './ClickButton';
+import { white, lightPurp, purple, pink} from '../utils/color';
 
-export default class IndividualDeckView extends Component {
+export class IndividualDeckView extends Component {
 	render() {
 		const deck = this.props.navigation.state.params.inputId;
-		const decks = getDecks();
+		const { decks } = this.props;
 		//console.log(deck);
 		return(
 			<View style={styles.container}>
 			<Text>{decks[deck].title}</Text>
 			<Text>{decks[deck].questions.length}</Text>
+			
+			<ClickButton styles={[styles.clkBtn, {backgroundColor:purple}]}  text={'Add  Card'} 
+			onPress={ () => this.props.navigation.navigate('IndividualDeckView', {inputId: deck})}/>
+
+			<ClickButton styles={[styles.clkBtn, {backgroundColor:pink}]} text={'Start Quiz'} 
+			onPress={ () => this.props.navigation.navigate('IndividualDeckView', {inputId: deck})}/>
+
 			</View>
 		)
 	}
@@ -21,5 +31,34 @@ const styles = StyleSheet.create({
 		flex:1,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	clkBtn: {	
+		padding: 10,
+		paddingLeft: 30,
+		paddingRight: 30,
+		borderRadius: 7,
+		height: 44,
+		alignSelf: 'flex-end',
+		marginRight: 40,
+		color: white,
+		fontSize: 21,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: 10
+
+	},
+	addBtnText: {
+		color: white,
+		fontSize: 21,
+		textAlign: 'center'
 	}
+	
 })
+
+function mapStateToProps (decks){
+	return {
+		decks
+	}
+}
+
+export default connect(mapStateToProps)(IndividualDeckView)
