@@ -11,6 +11,9 @@ import { createStore } from 'redux'
 import reducer from './reducers/index'
 import { Provider } from 'react-redux'
 import AddCard from './components/AddCard';
+import Quiz from './components/Quiz';
+
+
 
 
 function FlashCardStatusBar ({ backgroundColor, ...props}) {
@@ -85,6 +88,16 @@ const MainNavigator = StackNavigator({
 		screen: AddCard,
 		 navigationOptions: {
 			 title: 'Add Card',
+			 headerTintColor: white,
+			 headerStyle: {
+				backgroundColor: lightPurp
+			}
+		 }
+	},
+	Quiz: {
+		screen: Quiz,
+		 navigationOptions: {
+			 title: 'Quiz',
 			 headerTintColor: white,
 			 headerStyle: {
 				backgroundColor: lightPurp

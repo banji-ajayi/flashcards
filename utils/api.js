@@ -43,18 +43,6 @@ const Decks = {
 	}))
 }
 
-export function addNewCardToDeck(name, card) {
-	return AsyncStorage.getItem(STORAGE_KEY)
-	.then(data => JSON.parse(data))
-	.then(data => {
-		data[name].questions.push(card)
-		AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-			return data
-	})
-
-}
-
-
   export function getAllDecks (){
      
 	  return AsyncStorage.getItem(STORAGE_KEY)
@@ -67,3 +55,14 @@ export function addNewCardToDeck(name, card) {
 		  }
 	  })
   }
+
+  export function addNewCardToDeck(name, card) {
+	return AsyncStorage.getItem(STORAGE_KEY)
+	.then(data => JSON.parse(data))
+	.then(data => {
+		data[name].questions.push(card)
+		AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+			return data
+	})
+
+}

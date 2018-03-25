@@ -16,9 +16,9 @@ export function addDeck (deck) {
 	}
 }
 
-export function addCardToDeck(card) {
+export function addCardToDeck(name) {
 	return {
 		type: ADD_CARD_TO_DECK,
-		card
+		name
 	}
 }

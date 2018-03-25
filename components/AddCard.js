@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { white, gray, blue, black, purple } from '../utils/color';
 import { NavigationActions } from 'react-navigation';
-import { TouchableOpacity, TextInput, KeyboardAvoidingView,
-View, Text, StyleSheet, Button, Platform} from 'react-native';
+import { TouchableOpacity, TextInput,
+View, Text, StyleSheet, Button, Platform, Alert} from 'react-native';
+
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../actions/index';
 import { addNewCardToDeck } from '../utils/api';
@@ -19,11 +20,6 @@ function SubmitBtn ( { onPress}) {
 
 export class AddCard extends Component {
 	
-	// changeText = (question) => {
-	// 	this.setState((state) => ({
-	// 		state[question]: 
-	// 	}))
-	// }
 
 	state = {
 		correct: '',
@@ -31,34 +27,46 @@ export class AddCard extends Component {
 		question: ''
 	}
 
-	addNewCard = (card) => {
+	addNewCard = (name) => {
+		//console.log(name);
 		const { question, answer, correct} = this.state;
 
-		this.props.dispatch(addCardToDeck({card, question, answer, correct}));
-		addNewCardToDeck(card, {question, answer, correct});
-		this.setState({question: '', answer:'', correct:''})
+		if (question === '') {
+            Alert.alert('Compulsory','Please enter question');
+            return;
+        }
+        if (answer === '') {
+            Alert.alert('Compulsory','Please enter answer');
+            return;
+		}
+		
+		if (correct === '') {
+            Alert.alert('Compulsory', 'Please enter correct answer');
+            return;
+        }
+
+
+		this.props.dispatch(addCardToDeck(
+			{name, question, answer, correct})
+		);
+		addNewCardToDeck(name, {question, answer, correct});
+		this.setState(
+			{question: '', answer:'', correct:''}
+		)
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: 'AddCard'
 		}))
 		
 	}
 
-	
-
-	// changeText = (input) => {
-	// 	this.setState({
-	// 	input
-	// })
-	// }
 
 	render() {
-
-		const name = this.props.navigation.state.params.entryId
+        console.log(this.props.navigation.state.params.inputId);
+		const name = this.props.navigation.state.params.inputId
 		
 		return (
-			<KeyboardAvoidingView behavior='padding' 
-			style={styles.container}>
-			<View>
+			
+			<View style={styles.container}>
 			<Text style={styles.formTitle}>Enter the question</Text>
 			<TextInput style={styles.formInput}
 			onChangeText={(question) => this.setState({
@@ -83,7 +91,7 @@ export class AddCard extends Component {
 			
 			<SubmitBtn onPress={() => this.addNewCard(name)}/>
 			</View>
-			</KeyboardAvoidingView>
+		
 		)
 	}
 

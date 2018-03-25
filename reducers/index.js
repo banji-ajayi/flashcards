@@ -24,15 +24,21 @@ function decks (state = {}, action) {
 				...addNewDeck
 			}
 		case ADD_CARD_TO_DECK:
-		const { question, answer, deck, correct} = action.card
+		const { name, question, answer, correct} = action.name
+		console.log(action.name);
+		console.log(question);
+		console.log(answer);
+		console.log(name);
+		console.log(correct);
 			return {
 				...state,
-				[deck]: {
-					...state[deck],
-					questions: [...state[deck].questions, {question, answer, correct}]
+				[name]: {
+					...state[name],
+					questions: [...state[name].questions, {question, answer, correct}]
 				}
+				
 			}
-		
+
 		default : 
 			return state;
 	}

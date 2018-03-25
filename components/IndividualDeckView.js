@@ -19,7 +19,7 @@ export class IndividualDeckView extends Component {
 			onPress={ () => this.props.navigation.navigate('AddCard', {inputId: deck})}/>
 
 			<ClickButton styles={[styles.clkBtn, {backgroundColor:pink}]} text={'Start Quiz'} 
-			onPress={ () => this.props.navigation.navigate('AddCard', {inputId: deck})}/>
+			onPress={ () => this.props.navigation.navigate('Quiz', {inputId: deck})}/>
 
 			</View>
 		)
