@@ -8,19 +8,6 @@ import ToggleButton from './ToggleButton'
 import { connect } from 'react-redux';
 import ClickButton from './ClickButton';
 
-function SubmitBtn ({text, color, onPress}) {
-	return (
-		<TouchableOpacity
-			style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
-			onPress={onPress}>
-			
-		    <Text style={[styles.submitBtnText,{color:color}] }>{text}</Text>
-			</TouchableOpacity>
-	)
-}
-
-//<Text style={[styles.subHeader, {color: white}]}>
-
 export class Quiz extends Component {
 
 	state = {
@@ -29,26 +16,61 @@ export class Quiz extends Component {
 		questionNo: 0,
 		question: false
 	}
+	
 
 	submitYourAnswer = (answer) => {
 		const deck = this.props.navigation.state.params.inputId;
 		const {questionNo} = this.state;
-		const decks = this.props.myDecks
-		const correct = decks[deck].questions[questionNo].correct.toLowerCase;
+		const decks = this.props.myDecks;
+		const correct = decks[deck].questions[questionNo].correct;
 
-		if(answer === correct) {
+		console.log(correct);
+		console.log(answer);
+
+		// if(answer === true){
+		// 	answer = correct;
+		// }
+
+		//console.log(answer);
+
+		// if(answer === true)
+		// 	 {  answer = correct
+
+		// 		console.log(correct);
+		// 		console.log(answer);
+
+		if(answer) {
 			this.setState({correct: this.state.correct + 1})
+			console.log(this.state.correct)
 		} else {
 			this.setState({incorrect: this.state.incorrect + 1})
+			console.log(this.state.incorrect)
 		}
 		this.setState({questionNo: this.state.questionNo + 1, question: false})
-
 	}
+	
 
 	displayAnswer = () => (
 		!this.state.question ? this.setState({ question: true})
 		: this.setState({question: false})
 	)
+
+	goBack = () => {
+		this.props.navigation.dispatch(NavigationActions.back({ key: null }))
+	}	
+
+	startOver = () => {
+		this.setState(
+			{
+			correct: 0,
+			incorrect: 0,
+			questionN0: 0, 
+			question: false,
+		}
+	)
+	}
+
+
 
 
 
@@ -60,9 +82,13 @@ export class Quiz extends Component {
 
 		if(questionNo === decks[deck].questions.length) {
 			return (
-				<View>
+				<View style={styles.container}>
 					<Text>{this.state.correct} correct answers out of {decks[deck].questions.length}!</Text>
-				</View>
+					
+					<ToggleButton color={gray} styles={styles} text={'Start Over'} onPress={this.startOver} />
+					<ToggleButton color={black} styles={styles} text={'GoBack'} onPress={this.goBack}/>
+
+					</View>
 			)
 		}
 
@@ -82,9 +108,10 @@ export class Quiz extends Component {
 			: <Text style= {styles.showAnswer} onPress={this.displayAnswer}> Question </Text>}
 			
 			</TouchableOpacity>
-			<SubmitBtn text={'Correct'} color='blue' onPress={() => this.submitYourAnswer('true')}/>
-			<SubmitBtn text={'Incorrect'} color='red' onPress={() => this.submitYourAnswer('false')}/>
-			
+
+			<ToggleButton color={blue} styles={styles} text={'Correct'} onPress={() => this.submitYourAnswer('true')}/>
+			<ToggleButton color={red} styles={styles} text={'Incorrect'} onPress={() => this.submitYourAnswer('false')}/>
+
 			</View>
 			</View>
 		)
@@ -105,9 +132,7 @@ const styles = StyleSheet.create ({
 		marginBottom: 15
 	},
 	numQuestions: {
-		// top: 0,
   		alignSelf: 'flex-start',
-  		// left: 0,
   		fontSize: 22,
   		margin: 5,
   		position: 'absolute',
@@ -119,30 +144,29 @@ const styles = StyleSheet.create ({
 		
 	},
 	submitBtnText: {
-		//color: white,
+		color: white,
 		fontSize: 22,
 		textAlign: 'center'
 	},
-	iosSubmitBtn: {
-		backgroundColor: white,
-		padding: 10,
-		borderRadius: 7,
-		height: 45,
-		marginLeft: 40,
-		marginRight: 40
+	// iosSubmitBtn: {
+	// 	backgroundColor: white,
+	// 	padding: 10,
+	// 	borderRadius: 7,
+	// 	height: 45,
+	// 	marginLeft: 40,
+	// 	marginRight: 40
 
-	},
+	// },
 	androidSubmitBtn: {
-		backgroundColor: white,
 		padding: 10,
 		paddingLeft: 30,
 		paddingRight: 30,
 		height: 45,
-		//width:160,
 		borderRadius: 6,
 		alignSelf: 'center',
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginBottom: 10
 
 	}
 
@@ -161,3 +185,6 @@ export default connect(mapStateToProps)(Quiz)
 // <ClickButton styles= {{	alignSelf: 'center',}} color={red} text={'Incorrect'}/>
 //<ToggleButton  style= {styles.showAnswer} text={'Answer'}></ToggleButton>
 //<SubmitBtn styles= {{	alignSelf: 'center',backgroundColor:red}}  text={'Testing'}/>
+
+// <SubmitBtn text={'Correct'} color='blue' onPress={() => this.submitYourAnswer('true')}/>
+// <SubmitBtn text={'Incorrect'} color='red' onPress={() => this.submitYourAnswer('false')}/>

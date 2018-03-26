@@ -12,6 +12,7 @@ import reducer from './reducers/index'
 import { Provider } from 'react-redux'
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/helper';
 
 
 
@@ -41,14 +42,8 @@ const Tabs = TabNavigator ({  //first argument to tab navigator
 			tabBarIcon: ({ tintColor }) => <Entypo name ='plus' size={30} color={tintColor}/>
 		}
 	} 
-}, { //2nd argument to tab Navigator
-	// tabBarPosition: {
-	// activeTintColor: lightPurp,
-	// style : {
-	// 	height: 55,
-	// 	backgroundColor: white
-	// }
-	// }
+}, { 
+
 	tabBarOptions: {
 		activeTintColor: Platform.OS === 'ios' ? lightPurp : white,
 		style: {
@@ -107,6 +102,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+	componentDidMount () {
+		setLocalNotification()
+	}
+
   render() {
     return (
 	<Provider store={createStore(reducer)}>
