@@ -13,7 +13,6 @@ export default function TextButton ({children, onPress, style={}}) {
 
 const styles = StyleSheet.create({
 	reset: {
-		//textAlign: 'center',
 		color: lightPurp
 	}
 })

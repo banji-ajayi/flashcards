@@ -28,7 +28,6 @@ export class AddCard extends Component {
 	}
 
 	addNewCard = (name) => {
-		//console.log(name);
 		const { question, answer, correct} = this.state;
 
 		if (question === '') {
@@ -118,7 +117,6 @@ const styles = StyleSheet.create ({
 		paddingLeft: 30,
 		paddingRight: 30,
 		height: 45,
-		//width:160,
 		borderRadius: 6,
 		alignSelf: 'center',
 		justifyContent: 'center',

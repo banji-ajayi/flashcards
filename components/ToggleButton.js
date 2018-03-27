@@ -12,21 +12,4 @@ export default function ToggleButton({ onPress, styles, text, color }){
 }
 
 
-// export default function ToggleButton ({children, style = {} }) {
-// 	return (
-// 		<TouchableOpacity>
-// 		<Text style={[styles.reset, style]}>{children}</Text>
-// 		</TouchableOpacity>
-// 	)
-// }
-
-// const styles = StyleSheet.create({
-// 	reset: {
-// 		textAlign: 'center',
-// 		color: white
-// 	}
-// })
-
-
-
 

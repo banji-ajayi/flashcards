@@ -15,7 +15,6 @@ export class Decklist extends Component {
 	render() {
 		const { decks } = this.props
 		
-		//console.log(this.props);
 		return (
 			<View style={styles.container} >
 			{Object.keys(decks).map( (deck) => {
@@ -58,7 +57,6 @@ function mapDispatchToProps (dispatch){
 
 function mapStateToProps (decks){
 	return {
-		//decks:decks
 		decks
 	}
 }

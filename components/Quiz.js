@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { white, gray, blue, black, purple, red } from '../utils/color';
 import { NavigationActions } from 'react-navigation';
 import { TouchableOpacity, TextInput,
-View, Text, StyleSheet, Button, Platform, Alert} from 'react-native';
+View, Text, StyleSheet, Button, Alert} from 'react-native';
 
 import ToggleButton from './ToggleButton'
 import { connect } from 'react-redux';
@@ -24,27 +24,10 @@ export class Quiz extends Component {
 		const decks = this.props.myDecks;
 		const correct = decks[deck].questions[questionNo].correct;
 
-		console.log(correct);
-		console.log(answer);
-
-		// if(answer === true){
-		// 	answer = correct;
-		// }
-
-		//console.log(answer);
-
-		// if(answer === true)
-		// 	 {  answer = correct
-
-		// 		console.log(correct);
-		// 		console.log(answer);
-
-		if(answer) {
+		if(answer === correct) {
 			this.setState({correct: this.state.correct + 1})
-			console.log(this.state.correct)
 		} else {
 			this.setState({incorrect: this.state.incorrect + 1})
-			console.log(this.state.incorrect)
 		}
 		this.setState({questionNo: this.state.questionNo + 1, question: false})
 	}
@@ -109,8 +92,8 @@ export class Quiz extends Component {
 			
 			</TouchableOpacity>
 
-			<ToggleButton color={blue} styles={styles} text={'Correct'} onPress={() => this.submitYourAnswer('true')}/>
-			<ToggleButton color={red} styles={styles} text={'Incorrect'} onPress={() => this.submitYourAnswer('false')}/>
+			<ToggleButton color={blue} styles={styles} text={'Correct'} onPress={() => this.submitYourAnswer(true)}/>
+			<ToggleButton color={red} styles={styles} text={'Incorrect'} onPress={() => this.submitYourAnswer(false)}/>
 
 			</View>
 			</View>
@@ -148,15 +131,6 @@ const styles = StyleSheet.create ({
 		fontSize: 22,
 		textAlign: 'center'
 	},
-	// iosSubmitBtn: {
-	// 	backgroundColor: white,
-	// 	padding: 10,
-	// 	borderRadius: 7,
-	// 	height: 45,
-	// 	marginLeft: 40,
-	// 	marginRight: 40
-
-	// },
 	androidSubmitBtn: {
 		padding: 10,
 		paddingLeft: 30,
@@ -180,11 +154,3 @@ function mapStateToProps(myDecks) {
 
 
 export default connect(mapStateToProps)(Quiz)
-
-// <ClickButton styles= {{	alignSelf: 'center', color: blue}}  text={'Correct'}/> 
-// <ClickButton styles= {{	alignSelf: 'center',}} color={red} text={'Incorrect'}/>
-//<ToggleButton  style= {styles.showAnswer} text={'Answer'}></ToggleButton>
-//<SubmitBtn styles= {{	alignSelf: 'center',backgroundColor:red}}  text={'Testing'}/>
-
-// <SubmitBtn text={'Correct'} color='blue' onPress={() => this.submitYourAnswer('true')}/>
-// <SubmitBtn text={'Incorrect'} color='red' onPress={() => this.submitYourAnswer('false')}/>
