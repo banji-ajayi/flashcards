@@ -22,7 +22,7 @@ export class AddCard extends Component {
 	
 
 	state = {
-		correct: '',
+		//correct: '',
 		answer: '',
 		question: ''
 	}
@@ -38,19 +38,14 @@ export class AddCard extends Component {
             Alert.alert('Compulsory','Please enter answer');
             return;
 		}
-		
-		if (correct === '') {
-            Alert.alert('Compulsory', 'Please enter correct answer');
-            return;
-        }
-
 
 		this.props.dispatch(addCardToDeck(
-			{name, question, answer, correct})
+			{name, question, answer})
 		);
-		addNewCardToDeck(name, {question, answer, correct});
+		addNewCardToDeck(name, {question, answer});
 		this.setState(
-			{question: '', answer:'', correct:''}
+			{question: '', answer:''}
+
 		)
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: 'AddCard'
@@ -60,7 +55,6 @@ export class AddCard extends Component {
 
 
 	render() {
-        console.log(this.props.navigation.state.params.inputId);
 		const name = this.props.navigation.state.params.inputId
 		
 		return (
@@ -80,13 +74,7 @@ export class AddCard extends Component {
 			})} 
 			 value={this.state.answer}></TextInput>
 
-			<Text style={styles.formTitle}>Enter the correct Answer</Text>
-			<TextInput style={styles.formInput}
-			onChangeText={(correct) => this.setState({
-				correct
-			})} 
-			value={this.state.correct}></TextInput>
-
+			
 			
 			<SubmitBtn onPress={() => this.addNewCard(name)}/>
 			</View>

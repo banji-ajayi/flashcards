@@ -9,12 +9,10 @@ const Decks = {
 		{
 		  question: 'What is React?',
 		  answer: 'A library for managing user interfaces',
-		  correct : true 
 		},
 		{
 		  question: 'Regular functions take in arguments while react takes what?',
 		  answer: 'Props',
-		  correct: true
 		}
 	  ]
 	},
@@ -24,7 +22,6 @@ const Decks = {
 		{
 		  question: 'Below equation represent Newton\'s First Law of motion',
 		  answer: 'V^2 = U^2 + 1/2at^2',
-		  correct: false
 		}
 	  ]
 	}

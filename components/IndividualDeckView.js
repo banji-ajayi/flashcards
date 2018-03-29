@@ -9,22 +9,22 @@ export class IndividualDeckView extends Component {
 	render() {
 		const deck = this.props.navigation.state.params.inputId;
 		const { decks } = this.props;
-		//console.log(deck);
 		return(
 			<View style={styles.container}>
 			<Text>{decks[deck].title}</Text>
 			<Text>{decks[deck].questions.length}</Text>
 			
-			<ClickButton styles={[styles.clkBtn, {backgroundColor:purple}]}  text={'Add  Card'} 
+			<ClickButton style={[styles.clkBtn, {backgroundColor:purple}]}  text={'Add  Card'} 
 			onPress={ () => this.props.navigation.navigate('AddCard', {inputId: deck})}/>
 
-			<ClickButton styles={[styles.clkBtn, {backgroundColor:pink}]} text={'Start Quiz'} 
+			<ClickButton style={[styles.clkBtn, {backgroundColor:pink}]} text={'Start Quiz'} 
 			onPress={ () => this.props.navigation.navigate('Quiz', {inputId: deck})}/>
 
 			</View>
 		)
 	}
 }
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -39,10 +39,8 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		height: 44,
 		alignSelf: 'flex-end',
-		marginRight: 60,
-		
-		color: white,
-		fontSize: 21,
+		marginRight: 110,
+
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginBottom: 10

@@ -22,9 +22,8 @@ export class Quiz extends Component {
 		const deck = this.props.navigation.state.params.inputId;
 		const {questionNo} = this.state;
 		const decks = this.props.myDecks;
-		const correct = decks[deck].questions[questionNo].correct;
 
-		if(answer === correct) {
+		if(answer === true) {
 			this.setState({correct: this.state.correct + 1})
 		} else {
 			this.setState({incorrect: this.state.incorrect + 1})
