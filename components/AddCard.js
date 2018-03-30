@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { white, gray, blue, black, purple } from '../utils/color';
-import { NavigationActions } from 'react-navigation';
 import { TouchableOpacity, TextInput,
 View, Text, StyleSheet, Button, Platform, Alert} from 'react-native';
 
@@ -22,19 +21,19 @@ export class AddCard extends Component {
 	
 
 	state = {
-		//correct: '',
 		answer: '',
 		question: ''
 	}
 
 	addNewCard = (name) => {
+		const deck = this.props.navigation.state.params.inputId;
 		const { question, answer, correct} = this.state;
 
-		if (question === '') {
+		if (question.trim() === '') {
             Alert.alert('Compulsory','Please enter question');
             return;
         }
-        if (answer === '') {
+        if (answer.trim() === '') {
             Alert.alert('Compulsory','Please enter answer');
             return;
 		}
@@ -47,9 +46,9 @@ export class AddCard extends Component {
 			{question: '', answer:''}
 
 		)
-		this.props.navigation.dispatch(NavigationActions.back({
-			key: 'AddCard'
-		}))
+		this.props.navigation.navigate(
+			'IndividualDeckView', {inputId: deck}
+		)
 		
 	}
 

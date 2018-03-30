@@ -44,7 +44,7 @@ const Decks = {
      
 	  return AsyncStorage.getItem(STORAGE_KEY)
 	  .then(data => {
-		  if(data === null || data === '') {
+		  if(!data) {
 			  AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(Decks))
 			  return Decks;
 		  } else {

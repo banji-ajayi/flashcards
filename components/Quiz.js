@@ -17,11 +17,10 @@ export class Quiz extends Component {
 		question: false
 	}
 	
+	
 
 	submitYourAnswer = (answer) => {
-		const deck = this.props.navigation.state.params.inputId;
 		const {questionNo} = this.state;
-		const decks = this.props.myDecks;
 
 		if(answer === true) {
 			this.setState({correct: this.state.correct + 1})
@@ -37,11 +36,12 @@ export class Quiz extends Component {
 		: this.setState({question: false})
 	)
 
-	goBack = () => {
-		this.props.navigation.dispatch(NavigationActions.back({ key: null }))
+	goBack = (deck) => {
+		this.props.navigation.navigate('IndividualDeckView', {inputId: deck}) 
+
 	}	
 
-	startOver = () => {
+	startOver = (deck) => {
 		this.setState(
 			{
 			correct: 0,
@@ -50,6 +50,7 @@ export class Quiz extends Component {
 			question: false,
 		}
 	)
+	this.props.navigation.navigate('Quiz', {inputId: deck}) 
 	}
 
 
@@ -67,8 +68,8 @@ export class Quiz extends Component {
 				<View style={styles.container}>
 					<Text>{this.state.correct} correct answers out of {decks[deck].questions.length}!</Text>
 					
-					<ToggleButton color={gray} styles={styles} text={'Start Over'} onPress={this.startOver} />
-					<ToggleButton color={black} styles={styles} text={'GoBack'} onPress={this.goBack}/>
+					<ToggleButton color={gray} styles={styles} text={'Start Over'} onPress={() => this.startOver(deck)} />
+					<ToggleButton color={black} styles={styles} text={'GoBack'} onPress={() => this.goBack(deck)}/>
 
 					</View>
 			)

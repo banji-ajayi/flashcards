@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Button, Text, Platform, StyleSheet, TextInput } from 'react-native';
+import { View, TouchableOpacity, Button, Text, Platform, StyleSheet, TextInput, Alert } from 'react-native';
 import { saveDeckTitle } from '../utils/api';
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
@@ -14,6 +14,10 @@ export class NewDeck extends Component {
 
 	addTitle = () => {
 		const { input } = this.state;
+		if (!input) {
+            Alert.alert('Compulsory','Please add Deck title ');
+            return;
+        }
 		saveDeckTitle(input)
 		this.props.dispatch(addDeck(input))
 		this.props.navigation.navigate('IndividualDeckView',

@@ -8,6 +8,7 @@ import { white, lightPurp, purple, pink} from '../utils/color';
 export class IndividualDeckView extends Component {
 	render() {
 		const deck = this.props.navigation.state.params.inputId;
+		console.log(deck);
 		const { decks } = this.props;
 		return(
 			<View style={styles.container}>
